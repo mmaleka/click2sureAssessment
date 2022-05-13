@@ -1,0 +1,61 @@
+{% extends 'adminView/index.html' %}
+
+{% block body %}
+<div class="container">
+    <h5 class="card-text">User Name: {{ user.name }}</h5>
+</div>
+<br/>
+<br/>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Accounts</h4>
+            <table class="table table-striped table-bordered table-smaller-font center">
+                <thead>
+                    <tr>
+                        <th class="center">ID</th>
+                        <th class="center">USER ID</th>
+                        <th class="center">TYPE</th>
+                        <th class="center">AMOUNT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for account in accounts %}
+                    <tr>
+                        <td>{{ account.id }}</td>
+                        <td>{{ account.user }}</td>
+                        <td>{{ account.type }}</td>
+                        <td>{{ account.amount }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <h4>Transactions</h4>
+            <table class="table table-striped table-bordered table-smaller-font center">
+                <thead>
+                    <tr>
+                        <th class="center">ID</th>
+                        <th class="center">USER ID</th>
+                        <th class="center">ACTION</th>
+                        <th class="center">AMOUNT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for transaction in transactions %}
+                    <tr>
+                        <td>{{ transaction.id }}</td>
+                        <td>{{ transaction.user }}</td>
+                        <td>{{ transaction.action }}</td>
+                        <td>{{ transaction.amount }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+    {% if accounts or transactions %}
+        <a href="{% url 'adminView:csv' user.id %}" class="btn btn-primary">Download CSV</a>
+    {% endif %}
+{% endblock %}
